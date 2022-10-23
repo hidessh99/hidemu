@@ -1,0 +1,22 @@
+#!/bin/sh
+#script manajemen WG and SSH
+#created bye HideSSH.com and Kumpulanremaja.com
+
+#OS Debian 9
+
+#manejemen
+wget -O install-wireguard "https://www.dropbox.com/s/p89ubjpypmk26rv/install-wireguard?dl=1" && chmod +x install-wireguard && ./install-wireguard
+
+
+#ssh + dropbear
+wget https://raw.githubusercontent.com/4hidessh/hidessh/main/ssh-baru.sh && chmod +x ssh-baru.sh && ./ssh-baru.sh
+
+
+#firewall
+wget https://raw.githubusercontent.com/4hidessh/hidessh/main/torrent && chmod +x torrent && ./torrent
+netfilter-persistent save
+netfilter-persistent reload 
+
+#hapus
+cd
+rm -rf wg-hidessh

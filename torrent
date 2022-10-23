@@ -1,0 +1,149 @@
+
+#tambahan All Port yng diterima
+
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p udp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 143 -j ACCEPT
+iptables -A INPUT -p udp --dport 143 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p udp --dport 80 -j ACCEPT
+#dropbear
+iptables -A INPUT -p tcp --dport 44 -j ACCEPT
+iptables -A INPUT -p udp --dport 44 -j ACCEPT
+iptables -A INPUT -p tcp --dport 77 -j ACCEPT
+iptables -A INPUT -p udp --dport 77 -j ACCEPT
+
+#portSquid
+iptables -A INPUT -p tcp --dport 3128 -j ACCEPT
+iptables -A INPUT -p udp --dport 3128 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
+iptables -A INPUT -p udp --dport 8888 -j ACCEPT
+#port SSL
+
+iptables -A INPUT -p tcp --dport 222 -j ACCEPT
+iptables -A INPUT -p udp --dport 222 -j ACCEPT
+iptables -A INPUT -p tcp --dport 444 -j ACCEPT
+iptables -A INPUT -p udp --dport 444 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p udp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp --dport 777 -j ACCEPT
+iptables -A INPUT -p udp --dport 777 -j ACCEPT
+
+iptables -A INPUT -p udp --dport 41243 -j ACCEPT
+iptables -A INPUT -p tcp --dport 41243 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 10343 -j ACCEPT
+iptables -A INPUT -p udp --dport 10343 -j ACCEPT
+iptables -A INPUT -p udp --dport 51820 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 51820 -j ACCEPT
+#openvpn
+iptables -A INPUT -p tcp --dport 1194 -j ACCEPT
+iptables -A INPUT -p udp --dport 1194 -j ACCEPT
+iptables -A INPUT -p tcp --dport 111 -j ACCEPT
+iptables -A INPUT -p udp --dport 111 -j ACCEPT
+
+## Try torrent name filters
+iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
+
+#Torrent
+iptables -D FORWARD -m string --algo bm --string "BitTorrent" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string "BitTorrent protocol" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string "peer_id=" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string ".torrent" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string "announce.php?passkey=" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string "torrent" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string "announce" -j LOGDROP
+iptables -D FORWARD -m string --algo bm --string "info_hash" -j LOGDROP
+
+# DHT keyword
+iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
+iptables -A FORWARD -m string --string "announce_peer" --algo bm -j LOGDROP
+iptables -A FORWARD -m string --string "find_node" --algo bm -j LOGDROP
+
+
+## Modified debia commands
+
+iptables -A FORWARD -p udp -m string --algo bm --string "BitTorrent" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "peer_id=" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string ".torrent" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "torrent" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "announce" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "info_hash" -j DROP
+iptables -A FORWARD -p udp -m string --algo bm --string "tracker" -j DROP
+
+iptables -A INPUT -p udp -m string --algo bm --string "BitTorrent" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "peer_id=" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string ".torrent" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "torrent" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "announce" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "info_hash" -j DROP
+iptables -A INPUT -p udp -m string --algo bm --string "tracker" -j DROP
+
+iptables -I INPUT -p udp -m string --algo bm --string "BitTorrent" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "peer_id=" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string ".torrent" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "torrent" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "announce" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "info_hash" -j DROP
+iptables -I INPUT -p udp -m string --algo bm --string "tracker" -j DROP
+
+iptables -D INPUT -p udp -m string --algo bm --string "BitTorrent" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "peer_id=" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string ".torrent" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "torrent" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "announce" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "info_hash" -j DROP
+iptables -D INPUT -p udp -m string --algo bm --string "tracker" -j DROP
+
+iptables -I OUTPUT -p udp -m string --algo bm --string "BitTorrent" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "peer_id=" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string ".torrent" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "torrent" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "announce" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "info_hash" -j DROP
+iptables -I OUTPUT -p udp -m string --algo bm --string "tracker" -j DROP
+
+## Delete
+
+iptables -D INPUT -m string --algo bm --string "BitTorrent" -j DROP
+iptables -D INPUT -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -D INPUT -m string --algo bm --string "peer_id=" -j DROP
+iptables -D INPUT -m string --algo bm --string ".torrent" -j DROP
+iptables -D INPUT -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -D INPUT -m string --algo bm --string "torrent" -j DROP
+iptables -D INPUT -m string --algo bm --string "announce" -j DROP
+iptables -D INPUT -m string --algo bm --string "info_hash" -j DROP
+iptables -D INPUT -m string --algo bm --string "tracker" -j DROP
+
+iptables -D OUTPUT -m string --algo bm --string "BitTorrent" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "peer_id=" -j DROP
+iptables -D OUTPUT -m string --algo bm --string ".torrent" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "torrent" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "announce" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "info_hash" -j DROP
+iptables -D OUTPUT -m string --algo bm --string "tracker" -j DROP
+
+iptables -D FORWARD -m string --algo bm --string "BitTorrent" -j DROP
+iptables -D FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -D FORWARD -m string --algo bm --string "peer_id=" -j DROP
+iptables -D FORWARD -m string --algo bm --string ".torrent" -j DROP
+iptables -D FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -D FORWARD -m string --algo bm --string "torrent" -j DROP
+iptables -D FORWARD -m string --algo bm --string "announce" -j DROP
+iptables -D FORWARD -m string --algo bm --string "info_hash" -j DROP
+iptables -D FORWARD -m string --algo bm --string "tracker" -j DROP

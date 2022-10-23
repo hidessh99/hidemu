@@ -1,0 +1,27 @@
+#bash 
+#config tls && no tls
+
+
+#buat diresdori baru
+mkdir /data
+
+#konfigurasi TLS / SSL
+wget -O /data/tls.pem "https://raw.githubusercontent.com/4hidessh/hidessh/main/vmess/tls.pem"
+
+#konfigurasi NOn TLS
+wget -O /data/tls.key "https://raw.githubusercontent.com/4hidessh/hidessh/main/vmess/tls.key"
+
+cd
+
+#auto installer 
+wget https://raw.githubusercontent.com/4hidessh/hidessh/main/vmess/install-vmess && chmod +x install-vmess && ./install-vmess
+
+cd
+#auto installer SSH + Firewall
+wget https://raw.githubusercontent.com/4hidessh/hidessh/main/vmess/ssh-tunnel && chmod +x ssh-tunnel && ./ssh-tunnel
+
+
+#auto remove script 
+cd
+rm -rf install-vmess
+rm -rf ssh-tunnel

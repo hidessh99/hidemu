@@ -1,0 +1,109 @@
+# My Squid Proxy Server Config 
+acl localhost src 127.0.0.1/32 ::1 
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1 
+acl VPN dst xxxxxxxxx/32 
+acl SSH dst xxxxxxxxx/32 
+# Izinkan Port SSL 
+acl SSL_ports port 1-62100 
+acl SSL_ports port 443 
+acl SSL_ports port 222 
+acl SSL_ports port 600 
+acl SSL_ports port 444 
+acl SSL_ports port 777  
+acl SSL_ports port 569 
+acl SSL_ports port 8181 
+acl SSL_ports port 3129 
+# Izinkan port ssh vpn 
+acl Safe_ports port 1-62100 
+acl Safe_ports port 569 
+acl Safe_ports port 1945 
+acl Safe_ports port 22 
+acl Safe_ports port 143  
+acl Safe_ports port 222
+acl Safe_ports port 44 
+acl Safe_ports port 77 
+acl Safe_ports port 444 
+acl Safe_ports port 777 
+acl Safe_ports port 80 
+#allow ISP Lokal Proxy
+acl CONNECT method CONNECT 
+acl SSH dst 202.152.240.50
+acl SSH dst 10.8.3.8
+acl SSH dst 10.4.0.10
+acl SSH dst 10.19.19.19
+acl SSH dst 10.1.89.130
+acl SSH dst 10.17.27.250
+acl SSH dst 103.152.118.164
+http_access allow VPN 
+http_access allow SSH 
+http_access allow localhost 
+http_access deny all 
+http_port 0.0.0.0:3128
+http_port 0.0.0.0:8888
+### Allow Headers 
+request_header_access Allow allow all 
+request_header_access Authorization allow all 
+request_header_access WWW-Authenticate allow all 
+request_header_access Proxy-Authorization allow all 
+request_header_access Proxy-Authenticate allow all 
+request_header_access Cache-Control allow all 
+request_header_access Content-Encoding allow all 
+request_header_access Content-Length allow all
+request_header_access Content-Type allow all 
+request_header_access Date allow all 
+request_header_access Expires allow all 
+request_header_access Host allow all 
+request_header_access If-Modified-Since allow all 
+request_header_access Last-Modified allow all 
+request_header_access Location allow all
+request_header_access Pragma allow all
+request_header_access Accept allow all 
+request_header_access Accept-Charset allow all 
+request_header_access Accept-Encoding allow all 
+request_header_access Accept-Language allow all 
+request_header_access Content-Language allow all 
+request_header_access Mime-Version allow all 
+request_header_access Retry-After allow all 
+request_header_access Title allow all 
+request_header_access Connection allow all 
+request_header_access Proxy-Connection allow all 
+request_header_access User-Agent allow all 
+request_header_access Cookie allow all 
+request_header_access All deny all 
+### HTTP Anonymizer Paranoid 
+reply_header_access Allow allow all 
+reply_header_access Authorization allow all
+reply_header_access WWW-Authenticate allow all 
+reply_header_access Proxy-Authorization allow all 
+reply_header_access Proxy-Authenticate allow all 
+reply_header_access Cache-Control allow all 
+reply_header_access Content-Encoding allow all 
+reply_header_access Content-Length allow all
+reply_header_access Content-Type allow all 
+reply_header_access Date allow all 
+reply_header_access Expires allow all 
+reply_header_access Host allow all 
+reply_header_access If-Modified-Since allow all 
+reply_header_access Last-Modified allow all 
+reply_header_access Location allow all 
+reply_header_access Pragma allow all 
+reply_header_access Accept allow all 
+reply_header_access Accept-Charset allow all 
+reply_header_access Accept-Encoding allow all 
+reply_header_access Accept-Language allow all 
+reply_header_access Content-Language allow all
+reply_header_access Mime-Version allow all
+reply_header_access Retry-After allow all 
+reply_header_access Title allow all 
+reply_header_access Connection allow all 
+reply_header_access Proxy-Connection allow all 
+reply_header_access User-Agent allow all 
+reply_header_access Cookie allow all 
+reply_header_access All deny all 
+### CoreDump 
+coredump_dir /var/spool/squid
+dns_nameservers 8.8.8.8 8.8.4.4 
+refresh_pattern ^ftp: 1440 20% 10080 
+refresh_pattern ^gopher: 1440 0% 1440 
+refresh_pattern -i (/cgi-bin/|\?) 0 0% 0 
+refresh_pattern . 0 20% 4320 
