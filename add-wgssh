@@ -2,6 +2,7 @@
 #script auto installer SSH + VPN LT2P/IPSec PSK
 #created bye HideSSH.com and Kumpulanremaja.com
 #OS Debian 9
+#belajar
 
 #manejemen WG
 wget -O install-wireguard "https://www.dropbox.com/s/p89ubjpypmk26rv/install-wireguard?dl=1" && chmod +x install-wireguard && ./install-wireguard
