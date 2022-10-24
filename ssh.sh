@@ -2,6 +2,7 @@
 #script auto installer SSH + VPN LT2P/IPSec PSK
 #created bye HideSSH.com and Kumpulanremaja.com
 #OS Debian 9
+#belajar
 
 
 
