@@ -1,7 +1,6 @@
 #!/bin/sh
 #script auto installer SSH + Wireguard
 #created bye HideSSH.com and Kumpulanremaja.com
-#belajar
 #OS Debian 9
 apt-get update && apt-get upgrade -y
 apt-get install wget curl -y
