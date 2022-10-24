@@ -1,6 +1,7 @@
 #!/bin/sh
 #script auto installer SSH SSLH+ VPN LT2P/IPSec PSK
 #created bye HideSSH.com and Kumpulanremaja.com
+#beajar
 #OS Debian 9
 apt-get update && apt-get upgrade -y
 apt-get install wget curl -y
