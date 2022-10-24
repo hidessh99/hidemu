@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+#belajar
 # Original script by fornesia, rzengineer and fawzya 
 # Mod by hidessh
 # 
